@@ -5,15 +5,6 @@ const router = express.Router()
 // test-mongoose
 const List = require('../mongo-modules/list/list-mongodb');
 
-// const devServerSetup = require('../config/setup-dev-server');
-// let renderer;
-// var promise = devServerSetup(server, templatePath, (bundle, options) => {
-//     renderer = createRenderer(bundle, options);     //刷新renderer
-// });
-// render = (req, res) => {
-//     promise.then(() => baseRender(renderer, req, res));     //需要等待文件初始化
-// };
-
 const serverBundle = require(path.resolve(__dirname, '../dist/vue-ssr-server-bundle.json'));
 const clientManifest = require(path.resolve(__dirname, '../dist/vue-ssr-client-manifest.json'));
 const template = fs.readFileSync(path.resolve(__dirname, '../dist/index.ssr.html'), 'utf-8');
@@ -27,6 +18,7 @@ const baseHtml = (req, res) => {
     const context = { url: req.url }
 
     renderer.renderToString(context, (err, html) => {
+        console.log(err)
         if (err) {
             res.status(500).send('server error')
         } else {
@@ -39,6 +31,9 @@ router.get('/', (req, res) => {
     baseHtml(req, res)
 })
 router.get('/home', (req, res) => {
+    baseHtml(req, res)
+})
+router.get('/blog', (req, res) => {
     baseHtml(req, res)
 })
 router.get('/list', (req, res) => {

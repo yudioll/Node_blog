@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     mode: 'development',
 
-    entry: './app.js',
+    entry: './src/app.js',
 
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -31,7 +31,7 @@ module.exports = {
                 // })
             },
             {
-                test: /\.(jpg|jpeg|png|gif|svg)$/,
+                test: /\.(jpg|jpeg|png|gif|svg|woff|ttf)$/,
                 use: {
                     loader: 'url-loader',
                     options: {
@@ -49,7 +49,7 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            template: './index.html'
+            template: './src/index.client.html'
         }),
         new ExtractTextPlugin("styles.css")
     ]

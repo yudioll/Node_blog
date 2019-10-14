@@ -4,7 +4,7 @@
       <li v-for="item in data" :key="item._id">
         <h1>{{item.title}}</h1>
         <div>
-          <pre>{{item.content}}</pre>
+          <span>{{item.content}}</span>
           <span>{{item.date}}</span>
         </div>
       </li>
@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import { getList } from "../api/home";
+import { getList } from "@api/home";
 export default {
   name: "home",
   data() {
@@ -38,14 +38,6 @@ export default {
   components: {}
 };
 </script>
-<style lang="less" scoped>
-// .el-header {
-//   background-color: #b3c0d1;
-//   color: #333;
-//   line-height: 60px;
-// }
-
-// .el-aside {
-//   color: #333;
-// }
+<style  scoped>
+@import "./blog.less";
 </style>

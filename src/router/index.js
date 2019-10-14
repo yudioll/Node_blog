@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import App from '../App.vue'
+// import App from '../App.vue'
 
 Vue.use(Router);
 
@@ -8,11 +8,15 @@ function createRouter() {
     const routes = [
         {
             path: '*',
-
+            component: () => import('../components/home/home.vue')
         },
         {
             path: '/home',
-            component: () => import('../components/home.vue')
+            component: () => import('../components/foo.vue')
+        },
+        {
+            path: '/blog',
+            component: () => import('../components/blogs/blog.vue')
         }
     ];
 
