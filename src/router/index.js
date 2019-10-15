@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import App from '../App.vue'
 
 Vue.use(Router);
 
@@ -8,11 +7,11 @@ function createRouter() {
     const routes = [
         {
             path: '*',
-            component: () => import('../components/home/home.vue')
+            component: () => { }
         },
         {
             path: '/home',
-            component: () => import('../components/foo.vue')
+            component: () => import('../components/home/home.vue')
         },
         {
             path: '/blog',
@@ -21,7 +20,7 @@ function createRouter() {
     ];
 
     const router = new Router({
-        mode: 'history',
+        mode: 'hash',
         routes
     });
 

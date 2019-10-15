@@ -7,7 +7,12 @@ module.exports = {
     mode: 'development',
 
     entry: './src/app.js',
-
+    resolve: {
+        alias: {
+            '@api': path.resolve(__dirname, "src/api"),
+            '@component': path.resolve(__dirname, "src/components"),
+        }
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
@@ -31,6 +36,16 @@ module.exports = {
                 // })
             },
             {
+                test: /\.less$/,
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader"
+                }, {
+                    loader: "less-loader"
+                }]
+            },
+            {
                 test: /\.(jpg|jpeg|png|gif|svg|woff|ttf)$/,
                 use: {
                     loader: 'url-loader',
@@ -49,7 +64,7 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/index.client.html'
+            template: './src/index.html'
         }),
         new ExtractTextPlugin("styles.css")
     ]

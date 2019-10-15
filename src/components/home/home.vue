@@ -1,9 +1,8 @@
 <template>
-  <div class="home">
-    <h1>{{msg}}</h1>
-  </div>
+  <div class="home"></div>
 </template>
 <script>
+import ScrollReveal from "scrollreveal";
 export default {
   name: "home",
   data() {
@@ -12,7 +11,17 @@ export default {
     };
   },
   methods: {},
-  mounted() {},
+  mounted() {
+    const animations = {
+      contain: {
+        delay: 200,
+        origin: "bottom",
+        distance: "90px",
+        scale: 0.9
+      }
+    };
+    ScrollReveal().reveal(".headline", animations);
+  },
   components: {}
 };
 </script>

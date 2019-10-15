@@ -50,5 +50,9 @@ export function createApp(ssrContext) {
         ssrContext,
         render: h => h(App)
     })
+    // 前端页面调试使用
+    app.$mount('#app')
     return { app, store, router, App }
 }
+// 前端页面调试使用
+createApp()

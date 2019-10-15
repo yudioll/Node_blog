@@ -14,11 +14,9 @@ const renderer = require('vue-server-renderer').createBundleRenderer(serverBundl
     template,
     clientManifest
 })
-const baseHtml = (req, res) => {
+const baseHtml = (req, res, next) => {
     const context = { url: req.url }
-
     renderer.renderToString(context, (err, html) => {
-        console.log(err)
         if (err) {
             res.status(500).send('server error')
         } else {
@@ -27,6 +25,14 @@ const baseHtml = (req, res) => {
 
     })
 }
+router.all('*', (req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', 'true')
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', '*')
+    res.header('Access-Control-Allow-Headers', 'Content-Type,,username,XFILENAME,XFILECATEGORY,XFILESIZE,X-URL-PATH,x-access-token')
+    next()
+})
+
 router.get('/', (req, res) => {
     baseHtml(req, res)
 })
@@ -49,6 +55,7 @@ router.get('/list', (req, res) => {
     // List.findByIdAndRemove('5da18ddcd40d2b641c22c448', (err, data) => {
     //     res.send(data)
     // })
+
     List.find((err, data) => {
         if (err) {
             throw Error('serve error')

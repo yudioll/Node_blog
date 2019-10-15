@@ -1,17 +1,25 @@
 <template>
-  <div class="home">
-    <ul>
-      <li v-for="item in data" :key="item._id">
-        <h1>{{item.title}}</h1>
-        <div>
-          <span>{{item.content}}</span>
-          <span>{{item.date}}</span>
-        </div>
-      </li>
-    </ul>
+  <div class="blog">
+    <el-row class="blog-card" :span="6" v-for="(o, index) in data" :key="index">
+      <el-card class="blog-cards" shadow="hover">
+        <el-container>
+          <el-aside style="width:300px;height:300px;">
+            <img class="blog-images" src="https://cn.vuejs.org/images/logo.png" alt />
+          </el-aside>
+          <div style="padding: 14px;">
+            <span>{{o.title}}</span>
+            <div class="bottom clearfix">
+              <time class="time">{{ o.content }}</time>
+            </div>
+          </div>
+        </el-container>
+      </el-card>
+    </el-row>
   </div>
 </template>
 <script>
+import ScrollReveal from "scrollreveal";
+
 import { getList } from "@api/home";
 export default {
   name: "home",
@@ -33,11 +41,18 @@ export default {
     }
   },
   mounted() {
+    var fooReveal = {
+      delay: 200,
+      origin: "bottom",
+      distance: "90px",
+      scale: 0.9
+    };
+    ScrollReveal().reveal(".blog-card", fooReveal);
     this.getListbase();
   },
   components: {}
 };
 </script>
-<style  scoped>
+<style lang="less"  scoped>
 @import "./blog.less";
 </style>
