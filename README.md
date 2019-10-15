@@ -9,3 +9,6 @@ nodejs+vue-ssr+vue-router+express+mongodb 搭建(服务端渲染vuessr)个人博
     # 打开node 服务器
     node server/server.js
 ```
+
+# 前端展示
+![avatar](http://chuantu.xyz/t6/702/1571129222x2890149747.png)
