@@ -2,7 +2,6 @@
   <div class="home"></div>
 </template>
 <script>
-import ScrollReveal from "scrollreveal";
 export default {
   name: "home",
   data() {

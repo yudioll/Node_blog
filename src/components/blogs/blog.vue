@@ -18,8 +18,6 @@
   </div>
 </template>
 <script>
-import ScrollReveal from "scrollreveal";
-
 import { getList } from "@api/home";
 export default {
   name: "home",

@@ -97,7 +97,6 @@
 </template>
 
 <script>
-import ScrollReveal from "scrollreveal";
 export default {
   name: "APP",
   data() {
@@ -136,7 +135,6 @@ export default {
 .app-head {
   visibility: hidden;
   padding: 0;
-  // background-color: #24292e;
   margin-bottom: 20px;
   height: 80px !important;
   line-height: 80px;
