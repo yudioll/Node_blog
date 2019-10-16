@@ -1,15 +1,16 @@
 <template>
-  <div class="blog">
+  <div class="blog load-hidden">
     <el-row class="blog-card" :span="6" v-for="(o, index) in data" :key="index">
       <el-card class="blog-cards" shadow="hover">
         <el-container>
-          <el-aside style="width:300px;height:300px;">
+          <el-aside style="width:200px;height:200px;">
             <img class="blog-images" src="https://cn.vuejs.org/images/logo.png" alt />
           </el-aside>
           <div style="padding: 14px;">
             <span>{{o.title}}</span>
             <div class="bottom clearfix">
-              <time class="time">{{ o.content }}</time>
+              <div>{{o.content}}</div>
+              <time class="time">{{ o.date }}</time>
             </div>
           </div>
         </el-container>
@@ -41,11 +42,11 @@ export default {
   mounted() {
     var fooReveal = {
       delay: 200,
-      origin: "bottom",
+      origin: "right",
       distance: "90px",
-      scale: 0.9
+      scale: 1
     };
-    ScrollReveal().reveal(".blog-card", fooReveal);
+    ScrollReveal().reveal(".blog", fooReveal);
     this.getListbase();
   },
   components: {}

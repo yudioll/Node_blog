@@ -5,14 +5,17 @@
 
 const path = require('path')
 const VueloaderPlugin = require('vue-loader/lib/plugin')
-// console.log('../'+__dirname)
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack')
+
 module.exports = {
     mode: 'development',
     resolve: {
         extensions: ['.js', 'vue'],
         alias: {
             '@api': path.resolve(__dirname, "../src/api"),
-            '@component': path.resolve(__dirname, "src/components"),
+            '@component': path.resolve(__dirname, "../src/components"),
+            '@assets': path.resolve(__dirname, '../src/assets')
         }
     },
     output: {
@@ -31,11 +34,20 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['vue-style-loader', 'css-loader', 'postcss-loader']
+                use: ExtractTextPlugin.extract({
+                    use: [{
+                        loader: 'css-loader'
+                    }],
+                    fallback: 'style-loader'
+                })
             },
             {
                 test: /\.less$/,
-                use: ['css-loader', 'less-loader', 'postcss-loader']
+                use: [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    { loader: 'less-loader' }
+                ]
             },
             {
                 test: /\.(jpg|jpeg|png|gif|svg|woff|ttf)$/,
@@ -50,6 +62,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new VueloaderPlugin()
+        new VueloaderPlugin(),
+        new ExtractTextPlugin('style.css'),
+        new webpack.DefinePlugin({
+            'process.env': { NODE_ENV: '"development"' }
+        })
     ]
 }

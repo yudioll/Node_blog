@@ -7,7 +7,7 @@ function createRouter() {
     const routes = [
         {
             path: '*',
-            component: () => { }
+            component: () => import('../components/home/home.vue')
         },
         {
             path: '/home',
@@ -20,7 +20,8 @@ function createRouter() {
     ];
 
     const router = new Router({
-        mode: 'history',
+        // 前端调试使用hash --模式
+        mode: 'hash',
         routes
     });
 

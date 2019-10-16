@@ -8,22 +8,22 @@
           </el-col>
           <el-col :span="21">
             <el-row type="flex" justify="end">
-              <el-col :span="3">
+              <el-col :span="2">
                 <div class="grid-content bg-purple">
                   <router-link class="app-nav" to="home">首页</router-link>
                 </div>
               </el-col>
-              <el-col :span="3">
+              <el-col :span="2">
                 <div class="grid-content bg-purple">
                   <router-link class="app-nav" to="blog">随笔</router-link>
                 </div>
               </el-col>
-              <el-col :span="3">
+              <el-col :span="2">
                 <div class="grid-content bg-purple">
                   <router-link class="app-nav" to="blog">设计</router-link>
                 </div>
               </el-col>
-              <el-col :span="3">
+              <el-col :span="2">
                 <div class="grid-content bg-purple">
                   <router-link class="app-nav" to="blog">关于我</router-link>
                 </div>
@@ -33,64 +33,22 @@
         </el-row>
       </el-header>
       <el-container>
-        <el-aside class="app-aside" width="200px">
-          <el-menu :default-openeds="['1', '3']">
-            <el-submenu index="1">
-              <template slot="title">
-                <i class="el-icon-message"></i>导航一
-              </template>
-              <el-menu-item-group>
-                <template slot="title">分组一</template>
-                <el-menu-item index="1-1">选项1</el-menu-item>
-                <el-menu-item index="1-2">选项2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="分组2">
-                <el-menu-item index="1-3">选项3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="1-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-              </el-submenu>
-            </el-submenu>
-            <el-submenu index="2">
-              <template slot="title">
-                <i class="el-icon-menu"></i>导航二
-              </template>
-              <el-menu-item-group>
-                <template slot="title">分组一</template>
-                <el-menu-item index="2-1">选项1</el-menu-item>
-                <el-menu-item index="2-2">选项2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="分组2">
-                <el-menu-item index="2-3">选项3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="2-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-              </el-submenu>
-            </el-submenu>
-            <el-submenu index="3">
-              <template slot="title">
-                <i class="el-icon-setting"></i>导航三
-              </template>
-              <el-menu-item-group>
-                <template slot="title">分组一</template>
-                <el-menu-item index="3-1">选项1</el-menu-item>
-                <el-menu-item index="3-2">选项2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="分组2">
-                <el-menu-item index="3-3">选项3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="3-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-              </el-submenu>
-            </el-submenu>
-          </el-menu>
-        </el-aside>
         <el-main>
           <router-view :key="Math.random()*1"></router-view>
         </el-main>
+        <el-aside width="300px" style="overflow:hidden;">
+          <div class="author-info">
+            <el-card :body-style="{ padding: '20px' }">
+              <img src="../src/assets/yudioll/bg.jpg" class="image" />
+              <div style="padding: 14px;margin:10px 0;">
+                <span>yudioll</span>
+                <div class="bottom clearfix">
+                  <time class="time">{{ currentDate }}</time>
+                </div>
+              </div>
+            </el-card>
+          </div>
+        </el-aside>
       </el-container>
     </el-container>
   </div>
@@ -101,7 +59,8 @@ export default {
   name: "APP",
   data() {
     return {
-      activeIndex: "1"
+      activeIndex: "1",
+      currentDate: "2019-10-10"
     };
   },
   methods: {
@@ -113,7 +72,7 @@ export default {
     const animations = {
       asideAnimation: {
         delay: 200,
-        origin: "left",
+        origin: "right",
         distance: "90px",
         scale: 0.9,
         reset: true
@@ -127,6 +86,7 @@ export default {
     };
     ScrollReveal().reveal(".app-head", animations.headAnimation);
     ScrollReveal().reveal(".app-aside", animations.asideAnimation);
+    ScrollReveal().reveal(".author-info", animations.asideAnimation);
   },
   components: {}
 };
@@ -151,5 +111,13 @@ export default {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   text-decoration: none;
+}
+.author-info {
+  margin: 10px 0;
+  text-align: center;
+  .image {
+    width: 200px;
+    height: 200px;
+  }
 }
 </style>

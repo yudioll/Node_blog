@@ -11,4 +11,4 @@ nodejs+vue-ssr+vue-router+express+mongodb 搭建(服务端渲染vuessr)个人博
 ```
 
 # 前端展示
-![avatar](http://chuantu.xyz/t6/702/1571129222x2890149747.png)
+![avatar](http://chuantu.xyz/t6/702/1571222964x1031866013.png)

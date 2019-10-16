@@ -1,5 +1,26 @@
 <template>
-  <div class="home"></div>
+  <div class="home load-hidden">
+    <el-timeline class="headline">
+      <el-timeline-item timestamp="2018/4/12" placement="bottom">
+        <el-card>
+          <h4>更新 Github 模板</h4>
+          <p>王小虎 提交于 2018/4/12 20:46</p>
+        </el-card>
+      </el-timeline-item>
+      <el-timeline-item timestamp="2018/4/3" placement="bottom">
+        <el-card>
+          <h4>更新 Github 模板</h4>
+          <p>王小虎 提交于 2018/4/3 20:46</p>
+        </el-card>
+      </el-timeline-item>
+      <el-timeline-item timestamp="2018/4/2" placement="bottom">
+        <el-card>
+          <h4>更新 Github 模板</h4>
+          <p>王小虎 提交于 2018/4/2 20:46</p>
+        </el-card>
+      </el-timeline-item>
+    </el-timeline>
+  </div>
 </template>
 <script>
 export default {
@@ -13,17 +34,18 @@ export default {
   mounted() {
     const animations = {
       contain: {
-        delay: 200,
-        origin: "bottom",
+        delay: 300,
+        origin: "right",
         distance: "90px",
-        scale: 0.9
+        scale: 1
       }
     };
-    ScrollReveal().reveal(".headline", animations);
+    ScrollReveal().reveal(".home", animations.contain);
+    ScrollReveal().reveal(".author-info", animations.asideAnimation);
   },
   components: {}
 };
 </script>
-<style  scoped>
+<style lang="less"  scoped>
 @import "./home.less";
 </style>
