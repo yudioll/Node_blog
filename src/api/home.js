@@ -6,3 +6,21 @@ export function getList() {
         url: '/list'
     })
 }
+
+// 注册账户接口
+export function getSinup(data) {
+    return fetch({
+        method: 'post',
+        url: '/yudisignup',
+        data
+    })
+}
+
+// 登陆账户接口
+export function getLogin(data) {
+    return fetch({
+        method: 'post',
+        url: '/yudilogin',
+        data
+    })
+}

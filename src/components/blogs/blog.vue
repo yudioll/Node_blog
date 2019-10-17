@@ -7,7 +7,9 @@
             <img class="blog-images" src="https://cn.vuejs.org/images/logo.png" alt />
           </el-aside>
           <div style="padding: 14px;">
-            <span>{{o.title}}</span>
+            <router-link to="/view">
+              <span>{{o.title}}</span>
+            </router-link>
             <div class="bottom clearfix">
               <div>{{o.content}}</div>
               <time class="time">{{ o.date }}</time>

@@ -28,6 +28,16 @@
                   <router-link class="app-nav" to="blog">关于我</router-link>
                 </div>
               </el-col>
+              <el-col :span="2">
+                <div class="grid-content bg-purple">
+                  <router-link class="app-nav" to="yudilogin">登录</router-link>
+                </div>
+              </el-col>
+              <el-col :span="2">
+                <div class="grid-content bg-purple">
+                  <router-link class="app-nav" to="yudisignup">注册</router-link>
+                </div>
+              </el-col>
             </el-row>
           </el-col>
         </el-row>

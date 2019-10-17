@@ -7,15 +7,27 @@ function createRouter() {
     const routes = [
         {
             path: '*',
-            component: () => import('../components/home/home.vue')
+            component: () => import('@component/home/home.vue')
         },
         {
             path: '/home',
-            component: () => import('../components/home/home.vue')
+            component: () => import('@component/home/home.vue')
         },
         {
             path: '/blog',
-            component: () => import('../components/blogs/blog.vue')
+            component: () => import('@component/blogs/blog.vue')
+        },
+        {
+            path: '/view',
+            component: () => import('@component/views/view.vue')
+        },
+        {
+            path: '/yudilogin',
+            component: () => import('@component/yudilogin/yudilogin.vue')
+        },
+        {
+            path: '/yudisignup',
+            component: () => import('@component/yudisignup/yudisignup.vue')
         }
     ];
 
