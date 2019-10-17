@@ -2,7 +2,7 @@ const express = require('express')
 const fs = require('fs')
 const path = require('path')
 const router = express.Router()
-// test-mongoose
+// list-mongoose
 const List = require('../mongo-modules/list/list-mongodb');
 // user-mongodb
 const User = require('../mongo-modules/user/user-mongodb');
@@ -17,7 +17,10 @@ const renderer = require('vue-server-renderer').createBundleRenderer(serverBundl
     clientManifest
 })
 const baseHtml = (req, res, next) => {
-    const context = { url: req.url }
+    const context = {
+        url: req.url,
+        cookie: req.cookie
+    }
     renderer.renderToString(context, (err, html) => {
         if (err) {
             res.status(500).send('server error')
@@ -45,7 +48,7 @@ router.get('/blog', (req, res) => {
     baseHtml(req, res)
 })
 router.get('/view', (req, res) => {
-    baseHtml()
+    baseHtml(req, res)
 })
 
 /**
@@ -81,8 +84,10 @@ router.post('/yudilogin', (req, res) => {
                         // 找到当前登录用户的信息--对密码进行匹配
                         const [user] = data
                         if (user.pass === req.body.pass) {
+                            req.session.username = req.body.username
                             res.send({
                                 status: true,
+                                data: req.session,
                                 successMessage: '登陆成功',
                             })
                         } else {
@@ -99,7 +104,26 @@ router.post('/yudilogin', (req, res) => {
         }
     })
 })
-// 注册用户
+
+/**
+ * 退出登陆
+ * @author yudioll
+ */
+router.get('/yudiloginOut', (req, res) => {
+    //销毁session
+    //方法一,将cookie的时间设置为0，只有cookie中携带的信息通过客户端请求传到服务器，由对应的session接收session才起作用，cookie没了session自然而然的将不起作用
+    req.session.cookie.maxAge = 0;
+    //方法二destroy
+    // req.session.destroy((err) => {
+    //     console.log(err)
+    // })
+    res.redirect('/')
+})
+
+/**
+ * 注册用户
+ * @author yudioll
+ */
 router.post('/yudisignup', (req, res) => {
     User.find((err, data) => {
         if (err) {
@@ -132,7 +156,35 @@ router.post('/yudisignup', (req, res) => {
 
 })
 
-// 返回博文列表
+/**
+ * @description 获取用户信息
+ * @author yudioll
+ * @name userinfo
+ */
+router.get('/userinfo', (req, res) => {
+    // 判断当前用户是否登录
+    if (req.session.username) {
+        User.find({ username: req.session.username }, (err, data) => {
+            if (err) return res.statusCode(500).send('server error')
+            console.log(data)
+            res.send({
+                data,
+                loginStatus: true
+            })
+        })
+    } else {
+        res.send({
+            loginStatus: false,
+            errcode: 201 //未登陆状态码
+        })
+    }
+})
+
+/**
+ * @description 返回博文列表
+ * @author yudioll
+ * @name list
+ */
 router.get('/list', (req, res) => {
     List.find((err, data) => {
         if (err) {

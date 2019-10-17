@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-cloak>
     <el-container>
       <el-header class="app-head">
         <el-row style="height:80px">
@@ -51,7 +51,8 @@
             <el-card :body-style="{ padding: '20px' }">
               <img src="../src/assets/yudioll/bg.jpg" class="image" />
               <div style="padding: 14px;margin:10px 0;">
-                <span>yudioll</span>
+                <p>姓名：{{userinfo.username}}</p>
+                <p>年龄：{{userinfo.age}}</p>
                 <div class="bottom clearfix">
                   <time class="time">{{ currentDate }}</time>
                 </div>
@@ -65,17 +66,39 @@
 </template>
 
 <script>
+import { getUserinfo } from "@api/user.js";
 export default {
   name: "APP",
   data() {
     return {
-      activeIndex: "1",
-      currentDate: "2019-10-10"
+      islogin: false,
+      userinfo: {
+        username: "",
+        age: ""
+      },
+      currentDate: new Date().toLocaleDateString()
     };
   },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    getUserinfo() {
+      getUserinfo()
+        .then(res => {
+          if (res.loginStatus) {
+            const [userinfo] = res.data;
+            this.userinfo = {
+              username: userinfo.username,
+              age: userinfo.age
+            };
+          } else {
+            // this.$router.push({ path: "yudilogin" });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   mounted() {
@@ -97,11 +120,20 @@ export default {
     ScrollReveal().reveal(".app-head", animations.headAnimation);
     ScrollReveal().reveal(".app-aside", animations.asideAnimation);
     ScrollReveal().reveal(".author-info", animations.asideAnimation);
+    this.getUserinfo();
   },
-  components: {}
+  components: {},
+  watch: {
+    $route() {
+      this.getUserinfo();
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
+[v-cloak] {
+  display: none;
+}
 .app-head {
   visibility: hidden;
   padding: 0;

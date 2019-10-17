@@ -11,22 +11,27 @@ function createRouter() {
         },
         {
             path: '/home',
+            name: 'home',
             component: () => import('@component/home/home.vue')
         },
         {
             path: '/blog',
+            name: 'blog',
             component: () => import('@component/blogs/blog.vue')
         },
         {
             path: '/view',
+            name: 'view',
             component: () => import('@component/views/view.vue')
         },
         {
             path: '/yudilogin',
+            name: 'yudilogin',
             component: () => import('@component/yudilogin/yudilogin.vue')
         },
         {
             path: '/yudisignup',
+            name: 'yudisignup',
             component: () => import('@component/yudisignup/yudisignup.vue')
         }
     ];
