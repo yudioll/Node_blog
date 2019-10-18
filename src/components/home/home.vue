@@ -35,7 +35,7 @@ export default {
     const animations = {
       contain: {
         delay: 300,
-        origin: "right",
+        origin: "top",
         distance: "90px",
         scale: 1
       }

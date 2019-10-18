@@ -88,6 +88,7 @@ export default {
         .then(res => {
           if (res.loginStatus) {
             const [userinfo] = res.data;
+            this.islogin = res.loginStatus;
             this.userinfo = {
               username: userinfo.username,
               age: userinfo.age
