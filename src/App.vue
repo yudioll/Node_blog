@@ -28,14 +28,16 @@
                   <router-link class="app-nav" to="blog">关于我</router-link>
                 </div>
               </el-col>
-              <el-col :span="2">
+              <template v-if="!islogin">
+                <el-col :span="2">
+                  <div class="grid-content bg-purple">
+                    <router-link class="app-nav" to="yudilogin">登录</router-link>
+                  </div>
+                </el-col>
+              </template>
+              <el-col :span="2" v-if="islogin">
                 <div class="grid-content bg-purple">
-                  <router-link class="app-nav" to="yudilogin">登录</router-link>
-                </div>
-              </el-col>
-              <el-col :span="2">
-                <div class="grid-content bg-purple">
-                  <router-link class="app-nav" to="yudisignup">注册</router-link>
+                  <router-link class="app-nav" to="writeBlog">写作</router-link>
                 </div>
               </el-col>
             </el-row>
@@ -46,7 +48,7 @@
         <el-main>
           <router-view :key="Math.random()*1"></router-view>
         </el-main>
-        <el-aside width="300px" style="overflow:hidden;">
+        <el-aside v-if="islogin" width="300px" style="overflow:hidden;">
           <div class="author-info">
             <el-card :body-style="{ padding: '20px' }">
               <img src="../src/assets/yudioll/bg.jpg" class="image" />
@@ -66,41 +68,40 @@
 </template>
 
 <script>
-import { getUserinfo } from "@api/user.js";
+// import { getUserinfo } from "@api/user.js";
+import { mapGetters } from "vuex";
 export default {
   name: "APP",
   data() {
     return {
-      islogin: false,
-      userinfo: {
-        username: "",
-        age: ""
-      },
       currentDate: new Date().toLocaleDateString()
     };
+  },
+  computed: {
+    ...mapGetters(["islogin", "userinfo"])
   },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
-    },
-    getUserinfo() {
-      getUserinfo()
-        .then(res => {
-          if (res.loginStatus) {
-            const [userinfo] = res.data;
-            this.islogin = res.loginStatus;
-            this.userinfo = {
-              username: userinfo.username,
-              age: userinfo.age
-            };
-          } else {
-            // this.$router.push({ path: "yudilogin" });
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
     }
+    // getUserinfo() {
+    //   getUserinfo()
+    //     .then(res => {
+    //       if (res.loginStatus) {
+    //         const [userinfo] = res.data;
+    //         this.islogin = res.loginStatus;
+    //         this.userinfo = {
+    //           username: userinfo.username,
+    //           age: userinfo.age
+    //         };
+    //       } else {
+    //         // this.$router.push({ path: "yudilogin" });
+    //       }
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // }
   },
   mounted() {
     const animations = {
@@ -121,13 +122,14 @@ export default {
     ScrollReveal().reveal(".app-head", animations.headAnimation);
     ScrollReveal().reveal(".app-aside", animations.asideAnimation);
     ScrollReveal().reveal(".author-info", animations.asideAnimation);
-    this.getUserinfo();
+    // this.getUserinfo();
+    console.log(this.userinfo);
   },
   components: {},
   watch: {
-    $route() {
-      this.getUserinfo();
-    }
+    // $route() {
+    //   this.getUserinfo();
+    // }
   }
 };
 </script>

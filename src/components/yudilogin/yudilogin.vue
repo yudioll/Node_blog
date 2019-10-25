@@ -55,46 +55,83 @@ export default {
       }
     };
   },
+  computed: {},
   methods: {
     submitForm(formName) {
+      var _this = this;
       this.$refs[formName].validate(valid => {
         if (valid) {
-          getLogin(this.ruleForm)
+          _this.$store
+            .dispatch("getLogin", this.ruleForm)
             .then(res => {
-              if (res.status) {
-                this.$message({
-                  type: "success",
-                  message: res.successMessage
-                });
-                this.$router.push({ path: "/home" });
-              } else {
-                switch (res.errcode) {
-                  case 102: {
-                    this.$message({
-                      type: "error",
-                      message: res.errorMessage
-                    });
-                    break;
-                  }
-                  case 103: {
-                    this.$message({
-                      type: "error",
-                      message: res.errorMessage
-                    });
-                    break;
-                  }
-                  default: {
-                    this.$message({
-                      type: "error",
-                      message: "未知的错误"
-                    });
-                  }
-                }
-              }
+              console.log(res);
+              this.$message({
+                type: "success",
+                message: res.successMessage
+              });
+              this.$router.push({ path: "/home" });
             })
             .catch(err => {
-              console.log(err);
+              switch (err) {
+                case 102: {
+                  this.$message({
+                    type: "error",
+                    message: res.errorMessage
+                  });
+                  break;
+                }
+                case 103: {
+                  this.$message({
+                    type: "error",
+                    message: res.errorMessage
+                  });
+                  break;
+                }
+                default: {
+                  this.$message({
+                    type: "error",
+                    message: "未知的错误"
+                  });
+                }
+              }
             });
+          // getLogin(this.ruleForm)
+          //   .then(res => {
+          //     if (res.status) {
+          //       this.$message({
+          //         type: "success",
+          //         message: res.successMessage
+          //       });
+          //       this.$store.dispatch("SET_LOGIN");
+          //       this.$router.push({ path: "/home" });
+          //     } else {
+          //       switch (res.errcode) {
+          //         case 102: {
+          //           this.$message({
+          //             type: "error",
+          //             message: res.errorMessage
+          //           });
+          //           break;
+          //         }
+          //         case 103: {
+          //           this.$message({
+          //             type: "error",
+          //             message: res.errorMessage
+          //           });
+          //           break;
+          //         }
+          //         default: {
+          //           this.$message({
+          //             type: "error",
+          //             message: "未知的错误"
+          //           });
+          //         }
+          //       }
+          //     }
+          //   })
+          //   .catch(err => {
+          //     console.log(err);
+          //   });
         } else {
           return false;
         }

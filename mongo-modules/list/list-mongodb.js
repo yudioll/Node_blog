@@ -19,6 +19,18 @@ const List = new Schema({
         type: String,
         required: true,
         default: new Date()
+    },
+    imageUrl: {
+        type: String,
+        required: true
+    },
+    desc: {
+        type: String,
+        required: true
+    },
+    articalType: {
+        type: String,
+        default: 'node'
     }
 })
 

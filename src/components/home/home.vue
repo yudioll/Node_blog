@@ -23,6 +23,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "home",
   data() {
@@ -31,7 +32,11 @@ export default {
     };
   },
   methods: {},
+  computed: {
+    ...mapGetters(["islogin"])
+  },
   mounted() {
+    console.log(this.islogin);
     const animations = {
       contain: {
         delay: 300,

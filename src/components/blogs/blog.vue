@@ -3,15 +3,15 @@
     <el-row class="blog-card" :span="6" v-for="(o, index) in data" :key="index">
       <el-card class="blog-cards" shadow="hover">
         <el-container>
-          <el-aside style="width:200px;height:200px;">
-            <img class="blog-images" src="https://cn.vuejs.org/images/logo.png" alt />
+          <el-aside class="blog-aside">
+            <img class="blog-images" :src="o.imageUrl" alt />
           </el-aside>
           <div style="padding: 14px;">
-            <router-link to="/view">
+            <router-link :to="{path: '/viewblog', query: {id: o._id }}">
               <span>{{o.title}}</span>
             </router-link>
             <div class="bottom clearfix">
-              <div>{{o.content}}</div>
+              <div>{{o.desc}}</div>
               <time class="time">{{ o.date }}</time>
             </div>
           </div>

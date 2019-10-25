@@ -20,9 +20,9 @@ function createRouter() {
             component: () => import('@component/blogs/blog.vue')
         },
         {
-            path: '/view',
-            name: 'view',
-            component: () => import('@component/views/view.vue')
+            path: '/viewblog',
+            name: 'viewblog',
+            component: () => import('@component/viewblog/viewblog.vue')
         },
         {
             path: '/yudilogin',
@@ -33,6 +33,11 @@ function createRouter() {
             path: '/yudisignup',
             name: 'yudisignup',
             component: () => import('@component/yudisignup/yudisignup.vue')
+        },
+        {
+            path: '/writeBlog',
+            name: 'writeBlog',
+            component: () => import('@component/writeBlog/writeBlog.vue')
         }
     ];
 
